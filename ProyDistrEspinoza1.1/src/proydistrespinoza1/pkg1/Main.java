@@ -102,8 +102,7 @@ public class Main {
                     }
                     flag = true;
                     // Generar Última Sucursal
-                    int numRandom = (int) (Math.random() * 3 + 1);
-                    ultSucursal = String.valueOf(numRandom);
+                    ultSucursal = String.valueOf(Math.random() * 3 + 1);
                     // Registrar Dirección
                     while (flag) {
                         System.out.print("Dirección del empleado: ");
