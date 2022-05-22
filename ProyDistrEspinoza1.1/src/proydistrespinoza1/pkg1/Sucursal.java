@@ -68,9 +68,7 @@ public class Sucursal {
     }
     
     public boolean estaVacio(){
-        if(!this.arregloSucursal[0].equals("")){
-            return false;
-        }
-        return true;
+        return this.arregloSucursal[0].equals("");
     }
 }
+
