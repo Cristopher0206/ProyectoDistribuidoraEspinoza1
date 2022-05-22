@@ -12,18 +12,43 @@ import java.util.Scanner;
  * @author Cris
  */
 public class GestorSistema {
-    
+
+    //protected GestorSistema gestor = new GestorSistema();
+    protected Empleado emp = new Empleado();
+    protected int bandera = 0;
+
     // Constructor
     public GestorSistema() {
     }
-    
+
     // Método para iniciar el sistema
-    public void iniciarSistema(){
-        
+    public void iniciarSistema() {
+        while (bandera == 0) {
+            System.out.println("Seleccione una opción");
+            System.out.println("1. Registro de empleados");
+            System.out.println("2. Rotación de empleados");
+            System.out.println("3. Salir\n");
+
+            Scanner entrada = new Scanner(System.in);
+            int iEntrada = Integer.parseInt(entrada.nextLine());
+
+            switch (iEntrada) {
+                case 1:
+                    iniciarRegistroEmpleados();
+                    break;
+                case 2:
+
+                    break;
+                default:
+                    bandera = 1;
+                    break;
+            }
+
+        }
     }
-    
+
     // Método para iniciar la opción 1 del Sistema
-    public void iniciarRegistroEmpleados(Empleado emp) {
+    public void iniciarRegistroEmpleados() {
         String codigo = "", ultSucursal = "";
         String sNombre = "", sApellido = "", sCargo = "";
         String sDireccion = "", sCorreo = "", sTelefono = "";
@@ -141,9 +166,8 @@ public class GestorSistema {
         emp.setDireccion(sDireccion);
         emp.setCorreo(sCorreo);
         emp.setNumTelf(sTelefono);
-
+        
         System.out.println(emp.toString());
     }
-    
-    
+
 }

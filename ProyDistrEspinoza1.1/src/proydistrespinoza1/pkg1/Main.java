@@ -19,31 +19,10 @@ public class Main {
     public static void main(String[] args) {
         // TODO code application logic here
         GestorSistema gestor = new GestorSistema();
-        Empleado emp = new Empleado();
-        int bandera = 0;
         System.out.println("Bienvenido al sistema de gestión de empleados de la Distribuidora Espinoza");
-        while (bandera == 0) {
-            System.out.println("Seleccione una opción");
-            System.out.println("1. Registro de empleados");
-            System.out.println("2. Rotación de empleados");
-            System.out.println("3. Salir\n");
+        gestor.iniciarSistema();
+        
 
-            Scanner entrada = new Scanner(System.in);
-            int iEntrada = Integer.parseInt(entrada.nextLine());
-
-            switch (iEntrada) {
-                case 1:
-                    gestor.iniciarRegistroEmpleados(emp);
-                    break;
-                case 2:
-
-                    break;
-                case 3:
-                    bandera = 1;
-                    break;
-            }
-
-        }
     }
 
 }
