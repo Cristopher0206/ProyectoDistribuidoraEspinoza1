@@ -101,7 +101,7 @@ public class Main {
                     }
                     flag = true;
                     // Generar Última Sucursal
-                    ultSucursal = String.valueOf(Math.random() * 3 + 1);
+                    ultSucursal = String.valueOf((int) (Math.random() * 3 + 1));
                     // Registrar Dirección
                     while (flag) {
                         System.out.print("Dirección del empleado: ");
@@ -142,11 +142,15 @@ public class Main {
                     System.out.println("\n");
 
                     //Empleado newEmpl = new Empleado(codigo, sNombre, sApellido, sCargo, ultSucursal, sDireccion, sCorreo, sTelefono);
-                    /*emp.setCodigo(codigo);
+                    emp.setCodigo(codigo);
                     emp.setNombre(sNombre);
                     emp.setApellido(sApellido);
                     emp.setCargo(sCargo);
-                    emp.set*/
+                    emp.setUltimaSucursal(ultSucursal);
+                    emp.setDireccion(sDireccion);
+                    emp.setCorreo(sCorreo);
+                    emp.setNumTelf(sTelefono);
+                    
                     System.out.println(emp.toString());
                     break;
                 case 2:
