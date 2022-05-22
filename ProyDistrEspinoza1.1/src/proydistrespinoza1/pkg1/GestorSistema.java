@@ -167,7 +167,11 @@ public class GestorSistema {
         emp.setCorreo(sCorreo);
         emp.setNumTelf(sTelefono);
         
+        mostrarEmpleadoRegistrado();
+    }
+    
+    public void mostrarEmpleadoRegistrado(){
         System.out.println(emp.toString());
     }
-
+    
 }
