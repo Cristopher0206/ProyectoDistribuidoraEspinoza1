@@ -27,21 +27,16 @@ public class Main {
             System.out.println("2. Rotación de empleados");
             System.out.println("3. Salir\n");
 
-            String sEntrada = "";
             Scanner entrada = new Scanner(System.in);
-            sEntrada = entrada.nextLine();
+            String sEntrada = entrada.nextLine();
             int iEntrada = Integer.parseInt(sEntrada);
 
             switch (iEntrada) {
                 case 1:
-                    String codigo = "";
-                    String sNombre = "";
-                    String sApellido = "";
-                    String sCargo = "";
-                    String ultSucursal = "";
-                    String sDireccion = "";
-                    String sCorreo = "";
-                    String sTelefono = "";
+                    String codigo = "", ultSucursal = "";
+                    String sNombre = "", sApellido = "", sCargo = "";
+                    String sDireccion = "", sCorreo = "", sTelefono = "";
+
                     // Registrar Nombre
                     boolean flag = false;
                     while (flag == false) {
