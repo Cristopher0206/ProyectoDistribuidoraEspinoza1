@@ -28,8 +28,7 @@ public class Main {
             System.out.println("3. Salir\n");
 
             Scanner entrada = new Scanner(System.in);
-            String sEntrada = entrada.nextLine();
-            int iEntrada = Integer.parseInt(sEntrada);
+            int iEntrada = Integer.parseInt(entrada.nextLine());
 
             switch (iEntrada) {
                 case 1:
@@ -142,8 +141,13 @@ public class Main {
                     
                     System.out.println("\n");
 
-                    Empleado newEmpl = new Empleado(codigo, sNombre, sApellido, sCargo, ultSucursal, sDireccion, sCorreo, sTelefono);
-                    System.out.println(newEmpl.toString());
+                    //Empleado newEmpl = new Empleado(codigo, sNombre, sApellido, sCargo, ultSucursal, sDireccion, sCorreo, sTelefono);
+                    /*emp.setCodigo(codigo);
+                    emp.setNombre(sNombre);
+                    emp.setApellido(sApellido);
+                    emp.setCargo(sCargo);
+                    emp.set*/
+                    System.out.println(emp.toString());
                     break;
                 case 2:
 
