@@ -5,6 +5,9 @@
  */
 package proydistrespinoza1.pkg1;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 /**
@@ -14,6 +17,9 @@ import java.util.Scanner;
 public class GestorSistema {
 
     //protected GestorSistema gestor = new GestorSistema();
+    ListaDEnlazada lista = new ListaDEnlazada();
+    TablaHashEnlazadaEmpleados tabla = new TablaHashEnlazadaEmpleados();
+    NodoEmpleadoLista nuevoNodo = new NodoEmpleadoLista();
     protected Empleado emp = new Empleado();
     protected int bandera = 0;
 
@@ -95,6 +101,13 @@ public class GestorSistema {
                     codigo += "VD";
                     codigo += "-";
                     codigo += emp.generarDigitos();
+                    NodoEmpleadoLista nodoEmpleado = new NodoEmpleadoLista();
+                    while (nodoEmpleado.adelante != null && codigo.equals(emp.getCodigo())) {
+                        codigo = "VD";
+                        codigo += "-";
+                        codigo += emp.generarDigitos();
+                        nodoEmpleado = nodoEmpleado.adelante;
+                    }
                     flag = false;
                     break;
                 case "b":
@@ -102,6 +115,12 @@ public class GestorSistema {
                     codigo += "CT";
                     codigo += "-";
                     codigo += emp.generarDigitos();
+                    while (nuevoNodo.adelante != null && codigo.equals(emp.getCodigo())) {
+                        codigo = "CT";
+                        codigo += "-";
+                        codigo += emp.generarDigitos();
+                        nuevoNodo = nuevoNodo.adelante;
+                    }
                     flag = false;
                     break;
                 case "c":
@@ -109,6 +128,12 @@ public class GestorSistema {
                     codigo += "EB";
                     codigo += "-";
                     codigo += emp.generarDigitos();
+                    while (nuevoNodo.adelante != null && codigo.equals(emp.getCodigo())) {
+                        codigo = "EB";
+                        codigo += "-";
+                        codigo += emp.generarDigitos();
+                        nuevoNodo = nuevoNodo.adelante;
+                    }
                     flag = false;
                     break;
                 default:
@@ -168,10 +193,17 @@ public class GestorSistema {
         emp.setNumTelf(sTelefono);
         
         mostrarEmpleadoRegistrado();
+        
+        lista.insertarOrdenado(emp);
+        tabla.inicializar(codigo, ultSucursal);
+        
+        lista.actualizaFichero();
     }
     
     public void mostrarEmpleadoRegistrado(){
         System.out.println(emp.toString());
     }
+    
+    
     
 }
