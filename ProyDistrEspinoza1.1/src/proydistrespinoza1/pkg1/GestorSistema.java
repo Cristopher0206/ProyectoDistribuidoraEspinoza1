@@ -192,7 +192,7 @@ public class GestorSistema {
         emp.setCorreo(sCorreo);
         emp.setNumTelf(sTelefono);
         
-        mostrarEmpleadoRegistrado();
+        //mostrarEmpleadoRegistrado();
         
         lista.insertarOrdenado(emp);
         //tabla.inicializar(codigo, ultSucursal);
@@ -200,9 +200,9 @@ public class GestorSistema {
         lista.actualizaFichero();
     }
     
-    public void mostrarEmpleadoRegistrado(){
+    /*public void mostrarEmpleadoRegistrado(){
         System.out.println(emp.toString());
-    }
+    }*/
     
     
     

@@ -27,7 +27,7 @@ public class ListaDEnlazada {
         this.cabecera = cabecera;
     }
 
-    public String mostrar() {
+    /*public String mostrar() {
         String texto = "";
         if (this.cabecera == null) {
             return null;
@@ -40,7 +40,7 @@ public class ListaDEnlazada {
         }
         texto += actual.getInfo() + " ---> " + null;
         return texto;
-    }
+    }*/
 
     public void insertarOrdenado(Empleado empleado) {
         NodoEmpleadoLista insertObject = new NodoEmpleadoLista();
@@ -80,7 +80,7 @@ public class ListaDEnlazada {
         }
     }
 
-    public String obtenerEmpleado(String codigo) {
+    /*public String obtenerEmpleado(String codigo) {
         String empleado = "";
         NodoEmpleadoLista actual = this.cabecera;
         while (!actual.getInfo().getCodigo().equals(codigo)) {
@@ -89,7 +89,7 @@ public class ListaDEnlazada {
         empleado += actual.getInfo().getNombre();
         empleado += " " + actual.getInfo().getApellido();
         return empleado;
-    }
+    }*/
 
     public void actualizaFichero() {
         File fichero = null;
@@ -128,10 +128,6 @@ public class ListaDEnlazada {
                 e.printStackTrace();
             }
         }
-    }
-
-    public SourceVersion getSupportedSourceVersion() {
-        return SourceVersion.latest();
     }
 
     public String generarTokens() {
