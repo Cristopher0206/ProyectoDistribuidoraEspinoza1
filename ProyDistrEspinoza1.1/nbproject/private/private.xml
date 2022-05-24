@@ -4,8 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/GitHub/ProyectoDistribuidoraEspinoza1/ProyDistrEspinoza1.1/src/proydistrespinoza1/pkg1/Sucursal.java</file>
+            <file>file:/D:/GitHub/ProyectoDistribuidoraEspinoza1/ProyDistrEspinoza1.1/src/proydistrespinoza1/pkg1/NodoEmpleado.java</file>
             <file>file:/D:/GitHub/ProyectoDistribuidoraEspinoza1/ProyDistrEspinoza1.1/src/proydistrespinoza1/pkg1/Main.java</file>
+            <file>file:/D:/GitHub/ProyectoDistribuidoraEspinoza1/ProyDistrEspinoza1.1/src/proydistrespinoza1/pkg1/NodoEmpleadoLista.java</file>
             <file>file:/D:/GitHub/ProyectoDistribuidoraEspinoza1/ProyDistrEspinoza1.1/src/proydistrespinoza1/pkg1/GestorSistema.java</file>
+            <file>file:/D:/GitHub/ProyectoDistribuidoraEspinoza1/ProyDistrEspinoza1.1/src/proydistrespinoza1/pkg1/ListaDEnlazada.java</file>
+            <file>file:/D:/GitHub/ProyectoDistribuidoraEspinoza1/ProyDistrEspinoza1.1/src/proydistrespinoza1/pkg1/TablaHashEnlazadaEmpleados.java</file>
             <file>file:/D:/GitHub/ProyectoDistribuidoraEspinoza1/ProyDistrEspinoza1.1/src/proydistrespinoza1/pkg1/Empleado.java</file>
         </group>
     </open-files>

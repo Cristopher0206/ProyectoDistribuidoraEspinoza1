@@ -102,32 +102,17 @@ public class ListaDEnlazada {
             while (j == 0) {
                 if (actual.adelante != null) {
                     fichero = new File("registroEmpleados2.txt");
-                    fw = new FileWriter(fichero);
+                    fw = new FileWriter(fichero, true);
                     pw = new PrintWriter(fw);
-                    cadena += actual.getInfo().getCodigo() + ",";
-                    cadena += actual.getInfo().getNombre() + ",";
-                    cadena += actual.getInfo().getApellido() + ",";
-                    cadena += actual.getInfo().getCargo() + ",";
-                    cadena += actual.getInfo().getUltimaSucursal() + ",";
-                    cadena += actual.getInfo().getDireccion() + ",";
-                    cadena += actual.getInfo().getCorreo() + ",";
-                    cadena += actual.getInfo().getNumTelf() + "\n";
-                    String cadena2 = cadena;
-                    pw.println(cadena2+"\n");
+                    String cadena2 = generarTokens();
+                    pw.println(cadena2);
                     actual = actual.adelante;
                 } else {
                     fichero = new File("registroEmpleados2.txt");
-                    fw = new FileWriter(fichero);
+                    fw = new FileWriter(fichero, true);
                     pw = new PrintWriter(fw);
-                    cadena += actual.getInfo().getCodigo() + ",";
-                    cadena += actual.getInfo().getNombre() + ",";
-                    cadena += actual.getInfo().getApellido() + ",";
-                    cadena += actual.getInfo().getCargo() + ",";
-                    cadena += actual.getInfo().getUltimaSucursal() + ",";
-                    cadena += actual.getInfo().getDireccion() + ",";
-                    cadena += actual.getInfo().getCorreo() + ",";
-                    cadena += actual.getInfo().getNumTelf() + "\n";
-                    pw.println(cadena+"\n");
+                    cadena = generarTokens();
+                    pw.println(cadena);
                     j = 1;
                 }
             }
@@ -144,11 +129,24 @@ public class ListaDEnlazada {
             }
         }
     }
-    
-    
 
     public SourceVersion getSupportedSourceVersion() {
         return SourceVersion.latest();
+    }
+
+    public String generarTokens() {
+        NodoEmpleadoLista actual = this.cabecera;
+        String cadena = "";
+        cadena += actual.getInfo().getCodigo() + ",";
+        cadena += actual.getInfo().getNombre() + ",";
+        cadena += actual.getInfo().getApellido() + ",";
+        cadena += actual.getInfo().getCargo() + ",";
+        cadena += actual.getInfo().getUltimaSucursal() + ",";
+        cadena += actual.getInfo().getDireccion() + ",";
+        cadena += actual.getInfo().getCorreo() + ",";
+        cadena += actual.getInfo().getNumTelf();
+
+        return cadena;
     }
 
 }

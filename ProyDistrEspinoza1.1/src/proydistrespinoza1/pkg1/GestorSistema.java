@@ -18,7 +18,7 @@ public class GestorSistema {
 
     //protected GestorSistema gestor = new GestorSistema();
     ListaDEnlazada lista = new ListaDEnlazada();
-    TablaHashEnlazadaEmpleados tabla = new TablaHashEnlazadaEmpleados();
+    //TablaHashEnlazadaEmpleados tabla = new TablaHashEnlazadaEmpleados();
     NodoEmpleadoLista nuevoNodo = new NodoEmpleadoLista();
     protected Empleado emp = new Empleado();
     protected int bandera = 0;
@@ -195,7 +195,7 @@ public class GestorSistema {
         mostrarEmpleadoRegistrado();
         
         lista.insertarOrdenado(emp);
-        tabla.inicializar(codigo, ultSucursal);
+        //tabla.inicializar(codigo, ultSucursal);
         
         lista.actualizaFichero();
     }

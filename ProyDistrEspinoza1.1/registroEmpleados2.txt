@@ -1,3 +1,3 @@
-VD-7202,Cristopher,Perez,Vendedor,1,Benito Linares,cristopher@gmail.com,0983007423
-
-
+CT-6858,Lizbeth,Freire,Contador,3,Caupicho,lizbeth@gmail.com,0981969092
+VD-1732,Cristopher,Perez,Vendedor,1,Benito Linares,cristopher@gmail.com,0983007423
+VD-9748,Ariel,Rosero,Vendedor,2,Las Casas,ariel@gmail.com,0987917639
