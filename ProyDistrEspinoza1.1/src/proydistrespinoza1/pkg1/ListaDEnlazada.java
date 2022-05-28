@@ -102,16 +102,16 @@ public class ListaDEnlazada {
             while (j == 0) {
                 if (actual.adelante != null) {
                     fichero = new File("registroEmpleados2.txt");
-                    fw = new FileWriter(fichero, true);
+                    fw = new FileWriter(fichero);
                     pw = new PrintWriter(fw);
-                    String cadena2 = generarTokens();
+                    String cadena2 = generarTokens(actual);
                     pw.println(cadena2);
                     actual = actual.adelante;
                 } else {
                     fichero = new File("registroEmpleados2.txt");
-                    fw = new FileWriter(fichero, true);
+                    fw = new FileWriter(fichero);
                     pw = new PrintWriter(fw);
-                    cadena = generarTokens();
+                    cadena = generarTokens(actual);
                     pw.println(cadena);
                     j = 1;
                 }
@@ -130,8 +130,7 @@ public class ListaDEnlazada {
         }
     }
 
-    public String generarTokens() {
-        NodoEmpleadoLista actual = this.cabecera;
+    public String generarTokens(NodoEmpleadoLista actual) {
         String cadena = "";
         cadena += actual.getInfo().getCodigo() + ",";
         cadena += actual.getInfo().getNombre() + ",";

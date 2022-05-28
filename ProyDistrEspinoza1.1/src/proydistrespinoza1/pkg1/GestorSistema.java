@@ -30,8 +30,7 @@ public class GestorSistema {
     protected Sucursal Sucursal2 = new Sucursal(2);
     protected Sucursal Sucursal3 = new Sucursal(3);
     protected Sucursal Sucursal4 = new Sucursal(4);
-
-
+    protected String sucursal;
 
     // Constructor
     public GestorSistema() {
@@ -40,12 +39,12 @@ public class GestorSistema {
     // Método para iniciar el sistema
     public void iniciarSistema() {
         while (bandera == 0) {
-            
-            //System.out.println(lista.mostrar());
             System.out.println("Seleccione una opción");
             System.out.println("1. Registro de empleados");
-            System.out.println("2. Rotación de empleados");
-            System.out.println("3. Salir\n");
+            System.out.println("2. Eliminación de empleados");
+            System.out.println("3. Rotación de empleados");
+            System.out.println("4. Consulta de empleados");
+            System.out.println("5. Salir\n");
 
             Scanner entrada = new Scanner(System.in);
             int iEntrada = Integer.parseInt(entrada.nextLine());
@@ -55,9 +54,15 @@ public class GestorSistema {
                     iniciarRegistroEmpleados();
                     break;
                 case 2:
+                    iniciarEliminarEmpleados();
+                    break;
+                case 3:
                     iniciarRotacionEmpleados();
                     break;
-                default:
+                case 4:
+                    iniciarConsultaEmpleados();
+                    break;
+                case 5:
                     bandera = 1;
                     break;
             }
@@ -90,7 +95,7 @@ public class GestorSistema {
             System.out.print("Apellido del empleado: ");
             Scanner entradaApellido = new Scanner(System.in);
             sApellido = entradaApellido.nextLine();
-            // verificar nombre
+            // verificar apellido
             if (emp.esApellidoValido(sApellido)) {
                 flag = false;
             } else {
@@ -203,20 +208,15 @@ public class GestorSistema {
         emp.setDireccion(sDireccion);
         emp.setCorreo(sCorreo);
         emp.setNumTelf(sTelefono);
-        
+
         //mostrarEmpleadoRegistrado();
-        
         lista.insertarOrdenado(emp);
         tabla.inicializar(codigo, ultSucursal);
-        
+
         lista.actualizaFichero();
     }
-    
-    /*public void mostrarEmpleadoRegistrado(){
-        System.out.println(emp.toString());
-    }*/
-    
-    public void iniciarRotacionEmpleados(){
+
+    public void iniciarRotacionEmpleados() {
         System.out.println("Lista de empleados antes de la rotación:");
         System.out.println(tabla.mostrarEstructura());
         TablaHashEnlazadaEmpleados tabla2 = new TablaHashEnlazadaEmpleados();
@@ -415,12 +415,154 @@ public class GestorSistema {
 
         // Cambiar el archivo del registro de los empleados
         //lista.actualizaFichero();
-        
         System.out.println("Lista de empleados después de la rotación:");
         System.out.println(tabla.mostrarEstructura());
     }
+
+    public void iniciarConsultaEmpleados() {
+        boolean flag2 = true;
+        while (flag2) {
+            System.out.println("Seleccione el número de sucursal que desea consultar");
+            System.out.println("1. Sucursal 1");
+            System.out.println("2. Sucursal 2");
+            System.out.println("3. Sucursal 3");
+            System.out.println("4. Sucursal 4");
+            System.out.println("5. SALIR");
+            Scanner entradaSucursal = new Scanner(System.in);
+            sucursal = String.valueOf(entradaSucursal.nextLine());
+            switch (sucursal) {
+                case "1":
+                    if (!Sucursal1.estaVacio()) {
+                        System.out.println(Sucursal1.mostrarEstructura(lista));
+                    } else {
+                        File archivo1 = null;
+                        FileReader fr1 = null;
+                        BufferedReader br1 = null;
+                        try {
+                            archivo1 = new File("codigosEmpleadosSucursal1.txt");
+                            fr1 = new FileReader(archivo1);
+                            br1 = new BufferedReader(fr1);
+                            String codigo1;
+                            while ((codigo1 = br1.readLine()) != null) {
+                                Sucursal1.insertarCodigo(codigo1);
+                            }
+                        } catch (Exception e1) {
+                            e1.printStackTrace();
+                        } finally {
+                            try {
+                                if (null != fr1) {
+                                    fr1.close();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        System.out.println(Sucursal1.mostrarEstructura(lista));
+                    }
+                    break;
+                case "2":
+                    if (!Sucursal2.estaVacio()) {
+                        System.out.println(Sucursal2.mostrarEstructura(lista));
+                    } else {
+                        File archivo2 = null;
+                        FileReader fr2 = null;
+                        BufferedReader br2 = null;
+                        try {
+                            archivo2 = new File("codigosEmpleadosSucursal2.txt");
+                            fr2 = new FileReader(archivo2);
+                            br2 = new BufferedReader(fr2);
+                            String codigo2;
+                            while ((codigo2 = br2.readLine()) != null) {
+                                Sucursal2.insertarCodigo(codigo2);
+                            }
+                        } catch (Exception e2) {
+                            e2.printStackTrace();
+                        } finally {
+                            try {
+                                if (null != fr2) {
+                                    fr2.close();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        System.out.println(Sucursal2.mostrarEstructura(lista));
+                    }
+                    break;
+                case "3":
+                    if (!Sucursal3.estaVacio()) {
+                        System.out.println(Sucursal3.mostrarEstructura(lista));
+                    } else {
+                        File archivo3 = null;
+                        FileReader fr3 = null;
+                        BufferedReader br3 = null;
+                        try {
+                            archivo3 = new File("codigosEmpleadosSucursal3.txt");
+                            fr3 = new FileReader(archivo3);
+                            br3 = new BufferedReader(fr3);
+                            String codigo3;
+                            while ((codigo3 = br3.readLine()) != null) {
+                                Sucursal3.insertarCodigo(codigo3);
+                            }
+                        } catch (Exception e3) {
+                            e3.printStackTrace();
+                        } finally {
+                            try {
+                                if (null != fr3) {
+                                    fr3.close();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        System.out.println(Sucursal3.mostrarEstructura(lista));
+                    }
+                    break;
+                case "4":
+                    if (!Sucursal4.estaVacio()) {
+                        System.out.println(Sucursal4.mostrarEstructura(lista));
+                    } else {
+                        File archivo4 = null;
+                        FileReader fr4 = null;
+                        BufferedReader br4 = null;
+                        try {
+                            archivo4 = new File("codigosEmpleadosSucursal4.txt");
+                            fr4 = new FileReader(archivo4);
+                            br4 = new BufferedReader(fr4);
+                            String codigo4;
+                            while ((codigo4 = br4.readLine()) != null) {
+                                Sucursal4.insertarCodigo(codigo4);
+                            }
+                        } catch (Exception e4) {
+                            e4.printStackTrace();
+                        } finally {
+                            try {
+                                if (null != fr4) {
+                                    fr4.close();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        System.out.println(Sucursal4.mostrarEstructura(lista));
+                    }
+                    break;
+                case "5":
+                    flag2 = false;
+                    break;
+                default:
+                    flag2 = false;
+                    break;
+            }
+        }
+
+    }
     
-    public void inicializarArchivos(){
+    public void iniciarEliminarEmpleados(){
+        
+    }
+
+    public void inicializarArchivos() {
         File archivo = null;
         FileReader fr = null;
         BufferedReader br = null;
@@ -561,7 +703,5 @@ public class GestorSistema {
             }
         }
     }
-    
-    
-    
+
 }

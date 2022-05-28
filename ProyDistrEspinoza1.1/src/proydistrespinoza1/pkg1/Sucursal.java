@@ -54,16 +54,16 @@ public class Sucursal {
         return "El empleado " + info + " no se encuentra en la sucursal " + this.numSucursal;
     }
 
-    /*public String mostrarEstructura(ListaDEnlazada lista){
+    public String mostrarEstructura(ListaDEnlazada lista){
         String texto = "";
         texto += "Los siguientes empleados trabajan en la sucursal "+this.numSucursal+"\n";
-        for(int i = 0; i < this.arreglo.length; i++){
-            if (!this.arreglo[i].equals("")){
-                texto += "- " + this.arreglo[i] + ": " +lista.obtenerEmpleado(this.arreglo[i])+"\n";
+        for(int i = 0; i < this.arregloSucursal.length; i++){
+            if (!this.arregloSucursal[i].equals("")){
+                texto += "- " + this.arregloSucursal[i] + ": " +lista.obtenerEmpleado(this.arregloSucursal[i])+"\n";
             }
         }
         return texto;
-    }*/
+    }
     public void vaciarArreglo() {
         for (int i = 0; i < 13; i++) {
             this.arregloSucursal[i] = "";
