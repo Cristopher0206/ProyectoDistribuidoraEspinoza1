@@ -6,30 +6,30 @@
 package proydistrespinoza1.pkg1;
 
 //import com.beust.jcommander.Parameterized;
-import java.util.ArrayList;
-import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import static org.testng.Assert.*;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+
 
 @RunWith(value = Parameterized.class)
 /**
  *
  * @author Cris
  */
-public class ProductoParametersTest {
+public class CodigoParametersTest {
     String codigo;
     boolean expected = true;
     
     @Parameterized.Parameters
     public static Iterable <Object[]> parameters(){
         List <Object[]> objects = new ArrayList<Object[]>();
-        objects.add(new Object[]{"00001",true});
+        objects.add(new Object[]{"0001",true});
         objects.add(new Object[]{"00002",true});
         objects.add(new Object[]{"00003",true});
         objects.add(new Object[]{"00010",true});
@@ -38,7 +38,7 @@ public class ProductoParametersTest {
         return objects;
     }
     
-    public ProductoParametersTest(String codigo, boolean expected) {
+    public CodigoParametersTest(String codigo, boolean expected) {
         this.codigo = codigo;
         this.expected = expected;
     }
@@ -49,30 +49,6 @@ public class ProductoParametersTest {
         boolean actual = p.esCodigoValido(codigo);
         assertEquals(expected, actual);
     }
-    
-    
-    
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
-/*
-    @BeforeClass
-    public static void setUpClass() throws Exception {
-    }
 
-    @AfterClass
-    public static void tearDownClass() throws Exception {
-    }
-
-    @BeforeMethod
-    public void setUpMethod() throws Exception {
-    }
-
-    @AfterMethod
-    public void tearDownMethod() throws Exception {
-    }
-    */
     
 }

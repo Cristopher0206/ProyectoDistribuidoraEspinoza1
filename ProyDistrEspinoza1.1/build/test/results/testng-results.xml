@@ -2,10 +2,10 @@
 <testng-results total="0" passed="0" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2022-05-29T04:52:30Z" name="ProyDistrEspinoza1.1" finished-at="2022-05-29T04:52:30Z" duration-ms="40">
+  <suite started-at="2022-05-29T05:12:59Z" name="ProyDistrEspinoza1.1" finished-at="2022-05-29T05:12:59Z" duration-ms="40">
     <groups>
     </groups>
-    <test started-at="2022-05-29T04:52:30Z" name="proydistrespinoza1.pkg1.ProductoParametersTest" finished-at="2022-05-29T04:52:30Z" duration-ms="40">
+    <test started-at="2022-05-29T05:12:59Z" name="proydistrespinoza1.pkg1.ProductoParametersTest" finished-at="2022-05-29T05:12:59Z" duration-ms="40">
     </test> <!-- proydistrespinoza1.pkg1.ProductoParametersTest -->
   </suite> <!-- ProyDistrEspinoza1.1 -->
 </testng-results>
