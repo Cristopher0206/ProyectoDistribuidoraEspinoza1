@@ -57,10 +57,10 @@ public class GestorSistema {
                     iniciarEliminarEmpleados();
                     break;
                 case 3:
-                    iniciarRotacionEmpleados();
+                    //iniciarRotacionEmpleados();
                     break;
                 case 4:
-                    iniciarConsultaEmpleados();
+                    //iniciarConsultaEmpleados();
                     break;
                 case 5:
                     bandera = 1;
@@ -216,210 +216,7 @@ public class GestorSistema {
         lista.actualizaFichero();
     }
 
-    public void iniciarRotacionEmpleados() {
-        System.out.println("Lista de empleados antes de la rotación:");
-        System.out.println(tabla.mostrarEstructura());
-        TablaHashEnlazadaEmpleados tabla2 = new TablaHashEnlazadaEmpleados();
-
-        Empleado empleadoAux = new Empleado();
-        NodoEmpleadoLista actual = lista.getCabecera();
-        int k = 0;
-        while (k == 0) {
-            if (actual.getAdelante() != null) {
-                empleadoAux = actual.getInfo();
-                if (empleadoAux.getCargo().equals("Vendedor")) {
-                    String auxS = empleadoAux.getUltimaSucursal();
-                    int auxN = Integer.parseInt(auxS);
-                    auxN += 1;
-                    auxN = auxN % 4;
-
-                    tabla2.insertarEmpleadoTabla(empleadoAux.getCodigo(), String.valueOf(auxN));
-
-                    empleadoAux.setUltimaSucursal(String.valueOf(auxN));
-                    actual.setInfo(empleadoAux);
-                }
-                actual = actual.getAdelante();
-            } else {
-                empleadoAux = actual.getInfo();
-                if (empleadoAux.getCargo().equals("Vendedor")) {
-                    String auxS = empleadoAux.getUltimaSucursal();
-                    int auxN = Integer.parseInt(auxS);
-                    auxN += 1;
-                    auxN = auxN % 4;
-
-                    tabla2.insertarEmpleadoTabla(empleadoAux.getCodigo(), String.valueOf(auxN));
-
-                    empleadoAux.setUltimaSucursal(String.valueOf(auxN));
-                    actual.setInfo(empleadoAux);
-                }
-                actual = actual.getAdelante();
-                k = 1;
-            }
-
-        }
-        tabla = tabla2;
-        // this.txaDespués.setText(tabla.mostrarEstructura());
-
-        // Sobrescribir los archivos del código de los empleados
-        for (int i = 0; i < 4; i++) {
-            switch (i) {
-                case 0: // SUCURSAL 1
-                    File archivo1 = null;
-                    FileWriter fw1 = null;
-                    PrintWriter pw1 = null;
-                    try {
-                        archivo1 = new File("codigosEmpleadosSucursal1.txt");
-                        fw1 = new FileWriter(archivo1);
-                        pw1 = new PrintWriter(fw1);
-                        NodoEmpleado nodoActual = tabla2.getNodoEmpleado(0);
-                        String nuevoCodigo;
-                        int j = 0;
-                        while (j == 0) {
-                            if (nodoActual.enlace != null) {
-                                nuevoCodigo = nodoActual.getCodigo();
-                                pw1.println(nuevoCodigo);
-                                nodoActual = nodoActual.enlace;
-                            } else {
-                                nuevoCodigo = nodoActual.getCodigo();
-                                pw1.println(nuevoCodigo);
-                                nodoActual = nodoActual.enlace;
-                                j = 1;
-                            }
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    } finally {
-                        try {
-                            if (fw1 != null) {
-                                fw1.close();
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    break;
-                case 1: // SUCURSAL 2
-                    File archivo2 = null;
-                    FileWriter fw2 = null;
-                    PrintWriter pw2 = null;
-                    try {
-                        archivo2 = new File("codigosEmpleadosSucursal2.txt");
-                        fw2 = new FileWriter(archivo2);
-                        pw2 = new PrintWriter(fw2);
-                        NodoEmpleado nodoActual = tabla2.getNodoEmpleado(1);
-                        String nuevoCodigo;
-                        int j = 0;
-                        while (j == 0) {
-                            if (nodoActual.enlace != null) {
-                                nuevoCodigo = nodoActual.getCodigo();
-                                pw2.println(nuevoCodigo);
-                                nodoActual = nodoActual.enlace;
-                            } else {
-                                nuevoCodigo = nodoActual.getCodigo();
-                                pw2.println(nuevoCodigo);
-                                nodoActual = nodoActual.enlace;
-                                j = 1;
-                            }
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    } finally {
-                        try {
-                            if (fw2 != null) {
-                                fw2.close();
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    break;
-                case 2: // SUCURSAL 3
-                    File archivo3 = null;
-                    FileWriter fw3 = null;
-                    PrintWriter pw3 = null;
-                    try {
-                        archivo3 = new File("codigosEmpleadosSucursal3.txt");
-                        fw3 = new FileWriter(archivo3);
-                        pw3 = new PrintWriter(fw3);
-                        NodoEmpleado nodoActual = tabla2.getNodoEmpleado(2);
-                        String nuevoCodigo;
-                        int j = 0;
-                        while (j == 0) {
-                            if (nodoActual.enlace != null) {
-                                nuevoCodigo = nodoActual.getCodigo();
-                                pw3.println(nuevoCodigo);
-                                nodoActual = nodoActual.enlace;
-                            } else {
-                                nuevoCodigo = nodoActual.getCodigo();
-                                pw3.println(nuevoCodigo);
-                                nodoActual = nodoActual.enlace;
-                                j = 1;
-                            }
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    } finally {
-                        try {
-                            if (fw3 != null) {
-                                fw3.close();
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    break;
-                case 3: // SUCURSAL 4
-                    File archivo4 = null;
-                    FileWriter fw4 = null;
-                    PrintWriter pw4 = null;
-                    try {
-                        archivo4 = new File("codigosEmpleadosSucursal4.txt");
-                        fw4 = new FileWriter(archivo4);
-                        pw4 = new PrintWriter(fw4);
-                        NodoEmpleado nodoActual = tabla2.getNodoEmpleado(3);
-                        String nuevoCodigo;
-                        int j = 0;
-                        while (j == 0) {
-                            if (nodoActual.enlace != null) {
-                                nuevoCodigo = nodoActual.getCodigo();
-                                pw4.println(nuevoCodigo);
-                                nodoActual = nodoActual.enlace;
-                            } else {
-                                nuevoCodigo = nodoActual.getCodigo();
-                                pw4.println(nuevoCodigo);
-                                nodoActual = nodoActual.enlace;
-                                j = 1;
-                            }
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    } finally {
-                        try {
-                            if (fw4 != null) {
-                                fw4.close();
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    break;
-                default:
-                    JOptionPane.showInputDialog(null, "Algo salió mal xD");
-            }
-
-        }
-        Sucursal1.vaciarArreglo();
-        Sucursal2.vaciarArreglo();
-        Sucursal3.vaciarArreglo();
-        Sucursal4.vaciarArreglo();
-
-        // Cambiar el archivo del registro de los empleados
-        //lista.actualizaFichero();
-        System.out.println("Lista de empleados después de la rotación:");
-        System.out.println(tabla.mostrarEstructura());
-    }
-
-    public void iniciarConsultaEmpleados() {
+    /*public void iniciarConsultaEmpleados() {
         boolean flag2 = true;
         while (flag2) {
             System.out.println("Seleccione el número de sucursal que desea consultar");
@@ -556,7 +353,7 @@ public class GestorSistema {
             }
         }
 
-    }
+    }*/
     
     public void iniciarEliminarEmpleados(){
         
