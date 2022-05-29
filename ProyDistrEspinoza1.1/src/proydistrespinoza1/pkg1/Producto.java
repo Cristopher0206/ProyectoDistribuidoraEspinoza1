@@ -36,7 +36,7 @@ public class Producto {
         this.descripcion = descripcion;
     }
     
-    public static boolean esCodigoValido(String codigo) {
+    public boolean esCodigoValido(String codigo) {
         return codigo.matches("([0-9]{5})");
     }
 
@@ -63,6 +63,7 @@ public class Producto {
         Matcher m = p.matcher(stock);
         return m.matches();
     }
+    
     public boolean esProveedorValido(String proveedor) {
         Pattern p = Pattern.compile("^[a-zA-Z\\s]{1,300}");
         Matcher m = p.matcher(proveedor);

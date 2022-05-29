@@ -44,11 +44,13 @@ public class ProductoTest {
     public void testEsCodigoValido() {
         System.out.println("esCodigoValido");
         String codigo = "00001";
+        Producto instance = new Producto();
         boolean expResult = true;
-        boolean result = Producto.esCodigoValido(codigo);
+        boolean result = instance.esCodigoValido(codigo);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        // TODO review the generated test code and remove the default 
+        // call to fail.
+        // fail("The test case is a prototype.");
     }
 
     /**
