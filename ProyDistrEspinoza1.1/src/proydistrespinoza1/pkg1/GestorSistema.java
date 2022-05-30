@@ -211,12 +211,7 @@ public class GestorSistema {
         emp.setDireccion(sDireccion);
         emp.setCorreo(sCorreo);
         emp.setNumTelf(sTelefono);
-
-        //mostrarEmpleadoRegistrado();
-        /*listaEmpleados.insertarOrdenado(emp);
-        tabla.inicializar(codigo, ultSucursal);
-
-        listaEmpleados.actualizaFichero();*/
+        
         File fichero = null;
         FileWriter fw = null;
         PrintWriter pw = null;
@@ -461,9 +456,6 @@ public class GestorSistema {
 
     }
 
-    /*public void iniciarEliminarEmpleados() {
-
-    }*/
     public void inicializarArchivos() {
         File archivo = null;
         FileReader fr = null;
