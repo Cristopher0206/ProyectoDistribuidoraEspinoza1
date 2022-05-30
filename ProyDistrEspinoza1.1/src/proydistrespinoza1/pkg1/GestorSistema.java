@@ -363,6 +363,11 @@ public class GestorSistema {
         prod.marca = sMarca;
         prod.descripcion = sDescripcion;
 
+        sobrescribirArchivoProd(prod);
+
+    }
+    
+    public void sobrescribirArchivoProd(Producto prod){
         File fichero = null;
         FileWriter fw = null;
         PrintWriter pw = null;
@@ -379,8 +384,7 @@ public class GestorSistema {
             cadena += prod.proveedor + ",";
             cadena += prod.marca + ",";
             cadena += prod.descripcion;
-            String cadena2 = cadena;
-            pw.println(cadena2);
+            pw.println(cadena);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -392,7 +396,6 @@ public class GestorSistema {
                 e.printStackTrace();
             }
         }
-
     }
 
     public void iniciarConsultaEmpleados() {
@@ -404,12 +407,12 @@ public class GestorSistema {
             fr = new FileReader(archivo);
             br = new BufferedReader(fr);
             String linea;
+            Empleado nuevoEmpleado = new Empleado();
             while ((linea = br.readLine()) != null) {
                 String cadena = "";
                 StringTokenizer tokens = new StringTokenizer(linea, ",");
                 String dato = tokens.nextToken();
                 
-                Empleado nuevoEmpleado = new Empleado();
                 nuevoEmpleado.setCodigo(dato);
                 cadena += "|"+nuevoEmpleado.getCodigo()+"| -> ";
                 
@@ -441,10 +444,9 @@ public class GestorSistema {
                 nuevoEmpleado.setNumTelf(dato);
                 cadena += nuevoEmpleado.getNumTelf();
                 
-                System.out.println(cadena + "\n");
-                
-                
+                System.out.println(cadena);
             }
+            System.out.println("\n");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -509,7 +511,7 @@ public class GestorSistema {
             }
         }
         // Llenar los arreglos de las sucursales
-
+        /*
         // SUCURSAL 1
         File archivo1 = null;
         FileReader fr1 = null;
@@ -601,7 +603,7 @@ public class GestorSistema {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
+        }*/
     }
 
 }
