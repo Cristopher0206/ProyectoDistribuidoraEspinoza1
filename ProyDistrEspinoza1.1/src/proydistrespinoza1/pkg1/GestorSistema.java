@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.StringTokenizer;
@@ -41,12 +42,19 @@ public class GestorSistema {
     // Método para iniciar el sistema
     public void iniciarSistema() {
         while (bandera == 0) {
-            System.out.println("Seleccione una opción");
+            System.out.println("SELECCIONE UNA OPCIÓN");
+            System.out.println("================================================");
             System.out.println("1. Registro de empleados");
-            //System.out.println("2. Eliminación de empleados");
-            System.out.println("3. Registro de productos");
-            System.out.println("4. Consulta de empleados");
-            System.out.println("5. Salir\n");
+            System.out.println("2. Eliminación de empleados");
+            System.out.println("3. Consulta de empleados");
+            System.out.println("4. Actualización de empleados");
+            System.out.println("================================================");
+            System.out.println("5. Registro de productos");
+            System.out.println("6. Eliminación de productos");
+            System.out.println("7. Consulta de productos");
+            System.out.println("8. Actualización de productos");
+            System.out.println("================================================");
+            System.out.println("9. Salir\n");
 
             Scanner entrada = new Scanner(System.in);
             int iEntrada = Integer.parseInt(entrada.nextLine());
@@ -56,16 +64,27 @@ public class GestorSistema {
                     iniciarRegistroEmpleados();
                     break;
                 case 2:
-                    //iniciarEliminarEmpleados();
+                    iniciarEliminarEmpleados();
                     break;
                 case 3:
-                    //iniciarRotacionEmpleados();
-                    iniciarRegistroProductos();
-                    break;
-                case 4:
                     iniciarConsultaEmpleados();
                     break;
+                case 4:
+                    iniciarActualizarEmpleados();
+                    break;
                 case 5:
+                    iniciarRegistroProductos();
+                    break;
+                case 6:
+                    //iniciarEliminarProductos();
+                    break;
+                case 7:
+                    //iniciarConsultaProductos();
+                    break;
+                case 8:
+                    //iniciarActualizarProductos();
+                    break;
+                case 9:
                     bandera = 1;
                     break;
             }
@@ -211,7 +230,7 @@ public class GestorSistema {
         emp.setDireccion(sDireccion);
         emp.setCorreo(sCorreo);
         emp.setNumTelf(sTelefono);
-        
+
         File fichero = null;
         FileWriter fw = null;
         PrintWriter pw = null;
@@ -228,6 +247,275 @@ public class GestorSistema {
             cadena += emp.getDireccion() + ",";
             cadena += emp.getCorreo() + ",";
             cadena += emp.getNumTelf();
+            String cadena2 = cadena;
+            pw.println(cadena2);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (fw != null) {
+                    fw.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void iniciarEliminarEmpleados() {
+        System.out.println("Ingrese el ID del empleado a eliminar");
+        Scanner entrada = new Scanner(System.in);
+        String codigo = entrada.nextLine();
+        eliminarEmpleado(codigo);
+    }
+
+    public void eliminarEmpleado(String codigo) {
+        try {
+            File archivo = new File("registroEmpleados2.txt");
+            if (!archivo.isFile()) {
+                System.out.println("El archivo no existe");
+                return;
+            }
+            // Se instancia un nuevo archivo que contendrá la nueva lista
+            // y que luego será renombrado
+            File temp = new File(archivo.getAbsolutePath() + ".tmp");
+            BufferedReader br = new BufferedReader(new FileReader("registroEmpleados2.txt"));
+            PrintWriter pw = new PrintWriter(new FileWriter(temp));
+            String linea = null;
+            // Leer del archivo original y escribir en el nuevo
+            // a menos que el código sea el indicado
+            while ((linea = br.readLine()) != null) {
+                if (!linea.trim().contains(codigo)) {
+                    pw.println(linea);
+                    pw.flush();
+                }
+            }
+            pw.close();
+            br.close();
+
+            // Eliminando el archivo original
+            if (!archivo.delete()) {
+                System.out.println("El archivo no se pudo eliminar");
+                return;
+            }
+            // Renombrando el archivo temporal con el nombre original
+            if (!temp.renameTo(archivo)) {
+                System.out.println("No se pudo renombrar el archivo");
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void iniciarConsultaEmpleados() {
+        File archivo = null;
+        FileReader fr = null;
+        BufferedReader br = null;
+        try {
+            archivo = new File("registroEmpleados2.txt");
+            fr = new FileReader(archivo);
+            br = new BufferedReader(fr);
+            String linea;
+            Empleado nuevoEmpleado = new Empleado();
+            while ((linea = br.readLine()) != null) {
+                String cadena = "";
+                StringTokenizer tokens = new StringTokenizer(linea, ",");
+                String dato = tokens.nextToken();
+
+                nuevoEmpleado.setCodigo(dato);
+                cadena += "|" + nuevoEmpleado.getCodigo() + "| -> ";
+
+                dato = tokens.nextToken();
+                nuevoEmpleado.setNombre(dato);
+                cadena += nuevoEmpleado.getNombre() + " ";
+
+                dato = tokens.nextToken();
+                nuevoEmpleado.setApellido(dato);
+                cadena += nuevoEmpleado.getApellido() + ", ";
+
+                dato = tokens.nextToken();
+                nuevoEmpleado.setCargo(dato);
+                cadena += nuevoEmpleado.getCargo() + ", ";
+
+                dato = tokens.nextToken();
+                nuevoEmpleado.setUltimaSucursal(dato);
+                cadena += "Sucursal " + nuevoEmpleado.getUltimaSucursal() + ", ";
+
+                dato = tokens.nextToken();
+                nuevoEmpleado.setDireccion(dato);
+                cadena += nuevoEmpleado.getDireccion() + ", ";
+
+                dato = tokens.nextToken();
+                nuevoEmpleado.setCorreo(dato);
+                cadena += nuevoEmpleado.getCorreo() + ", ";
+
+                dato = tokens.nextToken();
+                nuevoEmpleado.setNumTelf(dato);
+                cadena += nuevoEmpleado.getNumTelf();
+
+                System.out.println(cadena);
+            }
+            System.out.println("\n");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (null != fr) {
+                    fr.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+
+    }
+
+    public void iniciarActualizarEmpleados() {
+        System.out.println("Ingrese el ID del empleado que desea actualizar");
+        Scanner entrada = new Scanner(System.in);
+        String codigo = entrada.nextLine();
+        System.out.println("Empelado: " + obtenerEmpleado(codigo));
+        actualizarEmpleado(codigo);
+    }
+
+    public void actualizarEmpleado(String codigo) {
+        boolean flag = true;
+        Empleado empActualizado = new Empleado();
+        String empl = obtenerEmpleado(codigo);
+        while (flag) {
+            StringTokenizer tokens = new StringTokenizer(empl, ",");
+            String dato = tokens.nextToken();
+            empActualizado.setCodigo(dato);
+            dato = tokens.nextToken();
+            empActualizado.setNombre(dato);
+            dato = tokens.nextToken();
+            empActualizado.setApellido(dato);
+            dato = tokens.nextToken();
+            empActualizado.setCargo(dato);
+            dato = tokens.nextToken();
+            empActualizado.setUltimaSucursal(dato);
+            dato = tokens.nextToken();
+            empActualizado.setDireccion(dato);
+            dato = tokens.nextToken();
+            empActualizado.setCorreo(dato);
+            dato = tokens.nextToken();
+            empActualizado.setNumTelf(dato);
+            System.out.println("¿Qué campo desea actualizar?");
+            System.out.println("a. Dirección");
+            System.out.println("b. Número de Teléfono");
+            System.out.println("c. Correo Electrónico");
+            System.out.println("d. Salir");
+            Scanner entrada = new Scanner(System.in);
+            String opcion = entrada.nextLine();
+            switch (opcion) {
+                case "a":
+                    eliminarEmpleado(codigo);
+                    int x = 0;
+                    while (x == 0) {
+                        System.out.println("Ingrese la nueva dirección:");
+                        Scanner entradaDir = new Scanner(System.in);
+                        String dir = entradaDir.nextLine();
+                        if (empActualizado.esDireccionValida(dir)) {
+                            empActualizado.setDireccion(dir);
+                            ingresarEmpleado(empActualizado);
+                            x = 1;
+                        } else {
+                            System.out.println("Su direccion no puede contener caracteres especiales");
+                        }
+                    }
+                    break;
+                case "b":
+                    eliminarEmpleado(codigo);
+                    int y = 0;
+                    while (y == 0) {
+                        System.out.println("Ingrese el nuevo número de teléfono:");
+                        Scanner entradaNum = new Scanner(System.in);
+                        String num = entradaNum.nextLine();
+                        if (empActualizado.esTelefonoValido(num)) {
+                            empActualizado.setNumTelf(num);
+                            ingresarEmpleado(empActualizado);
+                            y = 1;
+                        } else {
+                            System.out.println("Número de teléfono inválido, vuelva a ingresarlo");
+                        }
+                    }
+                    break;
+                case "c":
+                    eliminarEmpleado(codigo);
+                    int z = 0;
+                    while (z == 0) {
+                        System.out.println("Ingrese el nuevo correo electrónico:");
+                        Scanner entradaCorreo = new Scanner(System.in);
+                        String correo = entradaCorreo.nextLine();
+                        if (empActualizado.esCorreoValido(correo)) {
+                            empActualizado.setCorreo(correo);
+                            ingresarEmpleado(empActualizado);
+                            z = 1;
+                        } else {
+                            System.out.println("Correo inválido, vuelva a ingresarlo");System.out.println("Correo inválido, vuelva a ingresarlo"); System.out.println("Número de teléfono inválido, vuelva a ingresarlo");
+                        }
+                    }
+                    break;
+                case "d":
+                    flag = false;
+                    break;
+                default:
+                    System.out.println("Opción no válida, vuelva a ingresar");
+                    break;
+            }
+        }
+    }
+
+    public String obtenerEmpleado(String codigo) {
+        String empleado = "";
+        File archivo = null;
+        FileReader fr = null;
+        BufferedReader br = null;
+        try {
+            archivo = new File("registroEmpleados2.txt");
+            fr = new FileReader(archivo);
+            br = new BufferedReader(fr);
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                if (linea.contains(codigo)) {
+                    empleado = linea.trim();
+                }
+            }
+            if (empleado.equals("")) {
+                System.out.println("El empleado con código " + codigo
+                        + " no existe");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (null != fr) {
+                    fr.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+        return empleado;
+    }
+
+    public void ingresarEmpleado(Empleado empl) {
+        File fichero = null;
+        FileWriter fw = null;
+        PrintWriter pw = null;
+        String cadena = "";
+        try {
+            fichero = new File("registroEmpleados2.txt");
+            fw = new FileWriter(fichero, true);
+            pw = new PrintWriter(fw);
+            cadena += empl.getCodigo() + ",";
+            cadena += empl.getNombre() + ",";
+            cadena += empl.getApellido() + ",";
+            cadena += empl.getCargo() + ",";
+            cadena += empl.getUltimaSucursal() + ",";
+            cadena += empl.getDireccion() + ",";
+            cadena += empl.getCorreo() + ",";
+            cadena += empl.getNumTelf();
             String cadena2 = cadena;
             pw.println(cadena2);
         } catch (Exception e) {
@@ -361,8 +649,8 @@ public class GestorSistema {
         sobrescribirArchivoProd(prod);
 
     }
-    
-    public void sobrescribirArchivoProd(Producto prod){
+
+    public void sobrescribirArchivoProd(Producto prod) {
         File fichero = null;
         FileWriter fw = null;
         PrintWriter pw = null;
@@ -391,69 +679,6 @@ public class GestorSistema {
                 e.printStackTrace();
             }
         }
-    }
-
-    public void iniciarConsultaEmpleados() {
-        File archivo = null;
-        FileReader fr = null;
-        BufferedReader br = null;
-        try {
-            archivo = new File("registroEmpleados2.txt");
-            fr = new FileReader(archivo);
-            br = new BufferedReader(fr);
-            String linea;
-            Empleado nuevoEmpleado = new Empleado();
-            while ((linea = br.readLine()) != null) {
-                String cadena = "";
-                StringTokenizer tokens = new StringTokenizer(linea, ",");
-                String dato = tokens.nextToken();
-                
-                nuevoEmpleado.setCodigo(dato);
-                cadena += "|"+nuevoEmpleado.getCodigo()+"| -> ";
-                
-                dato = tokens.nextToken();
-                nuevoEmpleado.setNombre(dato);
-                cadena += nuevoEmpleado.getNombre() + " ";
-                
-                dato = tokens.nextToken();
-                nuevoEmpleado.setApellido(dato);
-                cadena += nuevoEmpleado.getApellido() + ", ";
-                
-                dato = tokens.nextToken();
-                nuevoEmpleado.setCargo(dato);
-                cadena += nuevoEmpleado.getCargo() + ", ";
-                
-                dato = tokens.nextToken();
-                nuevoEmpleado.setUltimaSucursal(dato);
-                cadena += "Sucursal " + nuevoEmpleado.getUltimaSucursal() + ", ";
-                
-                dato = tokens.nextToken();
-                nuevoEmpleado.setDireccion(dato);
-                cadena += nuevoEmpleado.getDireccion() + ", ";
-                
-                dato = tokens.nextToken();
-                nuevoEmpleado.setCorreo(dato);
-                cadena += nuevoEmpleado.getCorreo() + ", ";
-                
-                dato = tokens.nextToken();
-                nuevoEmpleado.setNumTelf(dato);
-                cadena += nuevoEmpleado.getNumTelf();
-                
-                System.out.println(cadena);
-            }
-            System.out.println("\n");
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (null != fr) {
-                    fr.close();
-                }
-            } catch (Exception e2) {
-                e2.printStackTrace();
-            }
-        }
-
     }
 
     public void inicializarArchivos() {
@@ -502,100 +727,6 @@ public class GestorSistema {
                 e2.printStackTrace();
             }
         }
-        // Llenar los arreglos de las sucursales
-        /*
-        // SUCURSAL 1
-        File archivo1 = null;
-        FileReader fr1 = null;
-        BufferedReader br1 = null;
-        try {
-            archivo1 = new File("codigosEmpleadosSucursal1.txt");
-            fr1 = new FileReader(archivo1);
-            br1 = new BufferedReader(fr1);
-            String codigo1;
-            while ((codigo1 = br1.readLine()) != null) {
-                Sucursal1.insertarCodigo(codigo1);
-            }
-        } catch (Exception e1) {
-            e1.printStackTrace();
-        } finally {
-            try {
-                if (null != fr1) {
-                    fr1.close();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        // SUCURSAL 2
-        File archivo2 = null;
-        FileReader fr2 = null;
-        BufferedReader br2 = null;
-        try {
-            archivo2 = new File("codigosEmpleadosSucursal2.txt");
-            fr2 = new FileReader(archivo2);
-            br2 = new BufferedReader(fr2);
-            String codigo2;
-            while ((codigo2 = br2.readLine()) != null) {
-                Sucursal2.insertarCodigo(codigo2);
-            }
-        } catch (Exception e2) {
-            e2.printStackTrace();
-        } finally {
-            try {
-                if (null != fr2) {
-                    fr2.close();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        // SUCURSAL 3
-        File archivo3 = null;
-        FileReader fr3 = null;
-        BufferedReader br3 = null;
-        try {
-            archivo3 = new File("codigosEmpleadosSucursal3.txt");
-            fr3 = new FileReader(archivo3);
-            br3 = new BufferedReader(fr3);
-            String codigo3;
-            while ((codigo3 = br3.readLine()) != null) {
-                Sucursal3.insertarCodigo(codigo3);
-            }
-        } catch (Exception e3) {
-            e3.printStackTrace();
-        } finally {
-            try {
-                if (null != fr3) {
-                    fr3.close();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        // SUCURSAL 4
-        File archivo4 = null;
-        FileReader fr4 = null;
-        BufferedReader br4 = null;
-        try {
-            archivo4 = new File("codigosEmpleadosSucursal4.txt");
-            fr4 = new FileReader(archivo4);
-            br4 = new BufferedReader(fr4);
-            String codigo4;
-            while ((codigo4 = br4.readLine()) != null) {
-                Sucursal4.insertarCodigo(codigo4);
-            }
-        } catch (Exception e4) {
-            e4.printStackTrace();
-        } finally {
-            try {
-                if (null != fr4) {
-                    fr4.close();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }*/
     }
 
 }

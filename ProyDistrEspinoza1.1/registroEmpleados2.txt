@@ -1,7 +1,4 @@
 CT-0001,Fernando,Cedeño,Contador,1,Av. El Salvador,fernando.cedenio@gmail.com,0980114607
-VD-0001,Cristopher,Pérez,Vendedor,2,Av. Benito Linares,cristopher.perez@gmail.com,0998516975
-VD-0002,Ariel,Rosero,Vendedor,3,Av. Gasca,ariel.rosero@gmail.com,0969827278
-VD-0003,Santiago,Pérez,Vendedor,0,Av. Eloy Alfaro,santiago.perez@gmail.com,0987917639
 VD-0004,Flor,Nieto,Vendedor,1,Av. Eloy Alfaro,flor.nieto@gmail.com,0987917801
 VD-0005,Ethan,Trujillo,Vendedor,2,Av. 12 de Octubre,ethan.trujillo@gmail.com,0996395963
 VD-0006,Melanie,Mendoza,Vendedor,3,Av. San Gabriel,melanie.mendoza@gmail.com,0960948754
@@ -18,5 +15,7 @@ VD-0023,Macarena,Alcivar,Vendedor,0,Av. Robles y Ricardo Arteaga,macarena.alciva
 VD-2169,Andrés,Cantos,Vendedor,3,Av. La Prensa,andres.santos@gmail.com,0998516978
 VD-5386,Erick,Freire,Vendedor,2,Tomates,erick.freire@gmail.com,0998765432
 ﻿GG-0001,Monica,Espinoza,Gerente General,0,Av. de las Américas,monica.espinoza@gmail.com,0993116975
-VD-863,Joel,Sanchez,Vendedor,3,La Gasca,joel@gmail.com,0998516975
 CT-8080,Valentina,Turi,Contador,2,Chillogallo,valentina@gmail.com,0123456789
+VD-0002,Ariel,Rosero,Vendedor,3,Las Casas,ariel.rosero@gmail.com,0969827278
+VD-0003,Santiago,Pérez,Vendedor,0,Av. Eloy Alfaro,santiago.perez.tigrero@gmail.com,0987917639
+VD-4423,Cristopher,Perez,Vendedor,3,Los Libertadores,cristopher.perez@gmail.com,0983007423
