@@ -76,13 +76,13 @@ public class GestorSistema {
                     iniciarRegistroProductos();
                     break;
                 case 6:
-                    //iniciarEliminarProductos();
+                    iniciarEliminarProductos();
                     break;
                 case 7:
-                    //iniciarConsultaProductos();
+                    iniciarConsultaProductos();
                     break;
                 case 8:
-                    //iniciarActualizarProductos();
+                    iniciarActualizarProductos();
                     break;
                 case 9:
                     bandera = 1;
@@ -452,7 +452,9 @@ public class GestorSistema {
                             ingresarEmpleado(empActualizado);
                             z = 1;
                         } else {
-                            System.out.println("Correo inválido, vuelva a ingresarlo");System.out.println("Correo inválido, vuelva a ingresarlo"); System.out.println("Número de teléfono inválido, vuelva a ingresarlo");
+                            System.out.println("Correo inválido, vuelva a ingresarlo");
+                            System.out.println("Correo inválido, vuelva a ingresarlo");
+                            System.out.println("Número de teléfono inválido, vuelva a ingresarlo");
                         }
                     }
                     break;
@@ -648,6 +650,352 @@ public class GestorSistema {
 
         sobrescribirArchivoProd(prod);
 
+    }
+
+    public void iniciarEliminarProductos() {
+        System.out.println("Ingrese el ID del producto a eliminar");
+        Scanner entrada = new Scanner(System.in);
+        String codigo = entrada.nextLine();
+        eliminarProducto(codigo);
+    }
+
+    public void eliminarProducto(String codigo) {
+        try {
+            File archivo = new File("registroProductos.txt");
+            if (!archivo.isFile()) {
+                System.out.println("El archivo no existe");
+                return;
+            }
+            // Se instancia un nuevo archivo que contendrá la nueva lista
+            // y que luego será renombrado
+            File temp = new File(archivo.getAbsolutePath() + ".tmp");
+            BufferedReader br = new BufferedReader(new FileReader("registroProductos.txt"));
+            PrintWriter pw = new PrintWriter(new FileWriter(temp));
+            String linea = null;
+            // Leer del archivo original y escribir en el nuevo
+            // a menos que el código sea el indicado
+            while ((linea = br.readLine()) != null) {
+                if (!linea.trim().contains(codigo)) {
+                    pw.println(linea);
+                    pw.flush();
+                }
+            }
+            pw.close();
+            br.close();
+
+            // Eliminando el archivo original
+            if (!archivo.delete()) {
+                System.out.println("El archivo no se pudo eliminar");
+                return;
+            }
+            // Renombrando el archivo temporal con el nombre original
+            if (!temp.renameTo(archivo)) {
+                System.out.println("No se pudo renombrar el archivo");
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void iniciarConsultaProductos() {
+        boolean flag = true;
+        while (flag) {
+            System.out.println("¿Qué desea consultar?");
+            System.out.println("a. Productos fuera de stock");
+            System.out.println("b. Todos los productos");
+            System.out.println("c. Productos ingresados en una fecha específica");
+            System.out.println("d. Salir");
+            Scanner entrada = new Scanner(System.in);
+            String opcion = entrada.nextLine();
+            Producto product = new Producto();
+            File archivo = null;
+            FileReader fr = null;
+            BufferedReader br = null;
+            switch (opcion) {
+                case "a":
+                    try {
+                    archivo = new File("registroProductos.txt");
+                    fr = new FileReader(archivo);
+                    br = new BufferedReader(fr);
+                    String linea;
+                    String cadena = "";
+                    while ((linea = br.readLine()) != null) {
+                        StringTokenizer tokens = new StringTokenizer(linea, ",");
+                        String line = "";
+                        while (tokens.hasMoreTokens()) {
+                            line = tokens.nextToken();
+                            if (line.equals("0")) {
+                                cadena += linea.trim() + "\n";
+                            }
+                        }
+                    }
+                    System.out.println("PRODUCTOS FUERA DE STOCK:");
+                    System.out.println(cadena);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        if (null != fr) {
+                            fr.close();
+                        }
+                    } catch (Exception e2) {
+                        e2.printStackTrace();
+                    }
+                }
+                break;
+                case "b":
+                    try {
+                    archivo = new File("registroProductos.txt");
+                    fr = new FileReader(archivo);
+                    br = new BufferedReader(fr);
+                    String linea;
+                    String cadena = "";
+                    while ((linea = br.readLine()) != null) {
+                        cadena += linea.trim() + "\n";
+                    }
+                    System.out.println(cadena);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        if (null != fr) {
+                            fr.close();
+                        }
+                    } catch (Exception e2) {
+                        e2.printStackTrace();
+                    }
+                }
+                break;
+                case "c":
+                    boolean flag2 = true;
+                    Producto p = new Producto();
+                    while (flag2 == true) {
+                        System.out.println("Ingrese la fecha de consulta (DD/MM/AA)");
+                        Scanner entradaFecha = new Scanner(System.in);
+                        String fecha = entradaFecha.nextLine();
+                        if (!p.esFechaValida(fecha)) {
+                            System.out.println("Fecha inválida - Intente nuevamente");
+                        } else {
+                            try {
+                                archivo = new File("registroProductos.txt");
+                                fr = new FileReader(archivo);
+                                br = new BufferedReader(fr);
+                                String linea;
+                                String cadena = "";
+                                while ((linea = br.readLine()) != null) {
+                                    StringTokenizer tokens = new StringTokenizer(linea, ",");
+                                    String line = "";
+                                    while (tokens.hasMoreTokens()) {
+                                        line = tokens.nextToken();
+                                        if (line.equals(fecha)) {
+                                            cadena += linea.trim() + "\n";
+                                        }
+                                    }
+                                }
+                                System.out.println("PRODUCTOS INGRESADOS EN LA FECHA "+fecha+": ");
+                                System.out.println(cadena);
+                                flag2 = false;
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            } finally {
+                                try {
+                                    if (null != fr) {
+                                        fr.close();
+                                    }
+                                } catch (Exception e2) {
+                                    e2.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+
+                    break;
+                case "d":
+                    flag = false;
+                    break;
+                default:
+                    System.out.println("Opción no válida, vuelva a ingresar");
+                    break;
+            }
+        }
+    }
+
+    public void iniciarActualizarProductos() {
+        System.out.println("Ingrese el ID del empleado que desea actualizar");
+        Scanner entrada = new Scanner(System.in);
+        String codigo = entrada.nextLine();
+        System.out.println("Empelado: " + obtenerEmpleado(codigo));
+        actualizarProducto(codigo);
+    }
+
+    public void actualizarProducto(String codigo) {
+        boolean flag = true;
+        Producto prodActualizado = new Producto();
+        String prod = obtenerProducto(codigo);
+        while (flag) {
+            StringTokenizer tokens = new StringTokenizer(prod, ",");
+            String dato = tokens.nextToken();
+            prodActualizado.codigo = dato;
+            dato = tokens.nextToken();
+            prodActualizado.nombre = dato;
+            dato = tokens.nextToken();
+            prodActualizado.fecha = dato;
+            dato = tokens.nextToken();
+            prodActualizado.precioUnitario = dato;
+            dato = tokens.nextToken();
+            prodActualizado.stock = dato;
+            dato = tokens.nextToken();
+            prodActualizado.proveedor = dato;
+            dato = tokens.nextToken();
+            prodActualizado.marca = dato;
+            dato = tokens.nextToken();
+            prodActualizado.descripcion = dato;
+            System.out.println("¿Qué campo desea actualizar?");
+            System.out.println("a. Nombre");
+            System.out.println("b. Descripción");
+            System.out.println("c. Precio Unitario");
+            System.out.println("d. Stock");
+            System.out.println("e. Salir");
+            Scanner entrada = new Scanner(System.in);
+            String opcion = entrada.nextLine();
+            switch (opcion) {
+                case "a":
+                    eliminarProducto(codigo);
+                    int x = 0;
+                    while (x == 0) {
+                        System.out.println("Ingrese el nuevo nombre:");
+                        Scanner entradaNom = new Scanner(System.in);
+                        String nom = entradaNom.nextLine();
+                        if (prodActualizado.esNombreValido(nom)) {
+                            prodActualizado.nombre = nom;
+                            ingresarProducto(prodActualizado);
+                            x = 1;
+                        } else {
+                            System.out.println("Nombre inválido - Intente nuevamente");
+                        }
+                    }
+                    break;
+                case "b":
+                    eliminarProducto(codigo);
+                    int y = 0;
+                    while (y == 0) {
+                        System.out.println("Ingrese la nueva descripción:");
+                        Scanner entradaDesc = new Scanner(System.in);
+                        String desc = entradaDesc.nextLine();
+                        if (prodActualizado.esDescripcionValida(desc)) {
+                            prodActualizado.descripcion = desc;
+                            ingresarProducto(prodActualizado);
+                            y = 1;
+                        } else {
+                            System.out.println("Descripción inválida - Intente nuevamente");
+                        }
+                    }
+                    break;
+                case "c":
+                    eliminarProducto(codigo);
+                    int z = 0;
+                    while (z == 0) {
+                        System.out.println("Ingrese el nuevo precio unitario:");
+                        Scanner entradaPrecio = new Scanner(System.in);
+                        String pUnitario = entradaPrecio.nextLine();
+                        if (prodActualizado.esPrecioValido(pUnitario)) {
+                            prodActualizado.precioUnitario = pUnitario;
+                            ingresarProducto(prodActualizado);
+                            z = 1;
+                        } else {
+                            System.out.println("Precio Unitario inválido - Intente nuevamente");
+                        }
+                    }
+                    break;
+                case "d":
+                    eliminarProducto(codigo);
+                    int b = 0;
+                    while (b == 0) {
+                        System.out.println("Ingrese el nuevo stock:");
+                        Scanner entradaStock = new Scanner(System.in);
+                        String stock = entradaStock.nextLine();
+                        if (prodActualizado.esStockValido(stock)) {
+                            prodActualizado.stock = stock;
+                            ingresarProducto(prodActualizado);
+                            b = 1;
+                        } else {
+                            System.out.println("Stock inválido - Intente nuevamente");
+                        }
+                    }
+                    break;
+                case "e":
+                    flag = false;
+                    break;
+                default:
+                    System.out.println("Opción no válida, vuelva a ingresar");
+                    break;
+            }
+        }
+    }
+
+    public String obtenerProducto(String codigo) {
+        String producto = "";
+        File archivo = null;
+        FileReader fr = null;
+        BufferedReader br = null;
+        try {
+            archivo = new File("registroProductos.txt");
+            fr = new FileReader(archivo);
+            br = new BufferedReader(fr);
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                if (linea.contains(codigo)) {
+                    producto = linea.trim();
+                }
+            }
+            if (producto.equals("")) {
+                System.out.println("El producto con código " + codigo
+                        + " no existe");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (null != fr) {
+                    fr.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+        return producto;
+    }
+
+    public void ingresarProducto(Producto prod) {
+        File fichero = null;
+        FileWriter fw = null;
+        PrintWriter pw = null;
+        String cadena = "";
+        try {
+            fichero = new File("registroProductos.txt");
+            fw = new FileWriter(fichero, true);
+            pw = new PrintWriter(fw);
+            cadena += prod.codigo + ",";
+            cadena += prod.nombre + ",";
+            cadena += prod.fecha + ",";
+            cadena += prod.precioUnitario + ",";
+            cadena += prod.stock + ",";
+            cadena += prod.proveedor + ",";
+            cadena += prod.marca + ",";
+            cadena += prod.descripcion;
+            String cadena2 = cadena;
+            pw.println(cadena2);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (fw != null) {
+                    fw.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void sobrescribirArchivoProd(Producto prod) {

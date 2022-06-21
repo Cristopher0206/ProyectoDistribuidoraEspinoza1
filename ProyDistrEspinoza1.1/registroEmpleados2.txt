@@ -16,6 +16,6 @@ VD-2169,Andrés,Cantos,Vendedor,3,Av. La Prensa,andres.santos@gmail.com,09985169
 VD-5386,Erick,Freire,Vendedor,2,Tomates,erick.freire@gmail.com,0998765432
 ﻿GG-0001,Monica,Espinoza,Gerente General,0,Av. de las Américas,monica.espinoza@gmail.com,0993116975
 CT-8080,Valentina,Turi,Contador,2,Chillogallo,valentina@gmail.com,0123456789
-VD-0002,Ariel,Rosero,Vendedor,3,Las Casas,ariel.rosero@gmail.com,0969827278
 VD-0003,Santiago,Pérez,Vendedor,0,Av. Eloy Alfaro,santiago.perez.tigrero@gmail.com,0987917639
 VD-4423,Cristopher,Perez,Vendedor,3,Los Libertadores,cristopher.perez@gmail.com,0983007423
+VD-0002,Ariel,Rosero,Vendedor,3,La comuna  ,ariel.rosero@gmail.com,0969827278
