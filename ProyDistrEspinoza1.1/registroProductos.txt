@@ -1,4 +1,1 @@
-00001,Cable HDMI3,22/05/2022,2.50,60,Novicompu,KDA,Cable integrado prensado para conexión HDMI
-00002,Mouse RGBA,30/06/2022,70.00,0,NoviCompu,KDA,Mouse alámbrico con colores RGBA estilo LOL
-00002,Teclado RGBA,21/06/2022,70.00,0,NoviCompu,KDA,Teclado mecánico con colores RGBA y recambios
-
+00003,Teclado RGBA,21/06/2022,70.00,100,NoviCompu,KDA,Teclado mecánico con colores RGBA y recambios

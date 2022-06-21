@@ -374,7 +374,7 @@ public class GestorSistema {
         System.out.println("Ingrese el ID del empleado que desea actualizar");
         Scanner entrada = new Scanner(System.in);
         String codigo = entrada.nextLine();
-        System.out.println("Empelado: " + obtenerEmpleado(codigo));
+        System.out.println("Empleado: " + obtenerEmpleado(codigo));
         actualizarEmpleado(codigo);
     }
 
@@ -821,10 +821,10 @@ public class GestorSistema {
     }
 
     public void iniciarActualizarProductos() {
-        System.out.println("Ingrese el ID del empleado que desea actualizar");
+        System.out.println("Ingrese el ID del producto que desea actualizar");
         Scanner entrada = new Scanner(System.in);
         String codigo = entrada.nextLine();
-        System.out.println("Empelado: " + obtenerEmpleado(codigo));
+        System.out.println("Producto: " + obtenerProducto(codigo));
         actualizarProducto(codigo);
     }
 
